@@ -6,9 +6,35 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --max-warnings 0",
+    "lint:all": "eslint \"src/**/*.{astro,ts,tsx,js,jsx}\"",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write",
+    "prepare": "node scripts/setup-hooks.js"
   },
   "dependencies": {
     "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint": "^9.25.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-astro": "^2.0.0",
+    "lint-staged": "^16.2.3",
+    "husky": "^9.1.2",
+    "prettier": "^3.1.0"
+  },
+  "lint-staged": {
+    "*.{astro,ts,tsx,js,jsx}": [
+      "npm run format -- --write",
+      "git add",
+      "npm run lint --"
+    ],
+    "*.{css,scss,md,json}": [
+      "npm run format -- --write",
+      "git add"
+    ]
   }
 }
